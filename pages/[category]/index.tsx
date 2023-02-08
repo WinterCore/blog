@@ -46,7 +46,7 @@ export const CategoriesIndex = (props: ICategoriesIndexProps): JSX.Element => {
 
 export const getStaticProps: GetStaticProps = async ({ params: { category } }) => {
   const posts = getCategoryPosts(category.toString(), ['date', 'description', 'slug', 'title']);
-  const categoryMeta = getCategoryMeta(category);
+  const categoryMeta = getCategoryMeta(category.toString());
 
   return {
     props: { posts, categoryMeta },

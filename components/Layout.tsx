@@ -7,14 +7,15 @@ import ThemeSwitch from './ThemeSwitch';
 type LayoutProps = {
   children: React.ReactNode;
   wavy?: boolean;
+  hero?: JSX.Element;
   customMeta?: MetaProps;
 };
 
 export const WEBSITE_HOST_URL = 'https://nextjs-typescript-mdx-blog.vercel.app';
 
-const Layout = ({ children, wavy, customMeta }: LayoutProps): JSX.Element => {
+const Layout = ({ children, wavy, customMeta, hero }: LayoutProps): JSX.Element => {
   return (
-    <div className="bg-[#DAF5FF] main-bg flex flex-col min-h-screen">
+    <div className="bg-sky-100 main-bg flex flex-col min-h-screen">
       {/* eslint-disable-next-line react/no-unknown-property */}
       <style jsx global>{`
           .dark .main-bg {
@@ -37,6 +38,7 @@ const Layout = ({ children, wavy, customMeta }: LayoutProps): JSX.Element => {
         {! wavy && (
             <>
               <div className="h-[200px]">
+                  {hero}
               </div>
               <div className="h-[72px] bg-white dark:bg-[#242F47]"></div>
             </>
