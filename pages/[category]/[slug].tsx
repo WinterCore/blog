@@ -18,6 +18,28 @@ import {CategoryMeta, getCategoryMeta} from '../../lib/api';
 import { MetaProps } from '../../types/layout';
 import { PostType } from '../../types/post';
 import { postFilePaths, POSTS_PATH } from '../../utils/mdxUtils';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import rust from 'react-syntax-highlighter/dist/cjs/languages/hljs/rust';
+SyntaxHighlighter.registerLanguage("rust", rust);
+import nightOwl from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
+import nnfx from 'react-syntax-highlighter/dist/cjs/styles/hljs/nnfx';
+import {useTheme} from 'next-themes';
+
+interface ICodeProps {
+    readonly language: string;
+    readonly children: string | string[];
+}
+
+const Code = (props: ICodeProps) => {
+    const { language, children } = props;
+    const { theme } = useTheme();
+
+    return (
+        <SyntaxHighlighter wrapLines language={language} style={theme === "dark" ? nightOwl : nnfx}>
+            {children}
+        </SyntaxHighlighter>
+    );
+};
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -27,6 +49,7 @@ const components = {
   Head,
   Image,
   Link,
+  Code,
 };
 
 type PostPageProps = {
@@ -64,8 +87,8 @@ const PostPage = ({ source, frontMatter, category, slug, categoryMeta }: PostPag
               }
           `}</style>
           <Layout customMeta={customMeta} hero={
-                  <div className="hero max-w-5xl mx-auto px-8 flex flex-col justify-end h-full py-8">
-                    <div className="whitespace-nowrap mb-3 flex gap-2 items-center font-bold">
+                  <div className="hero max-w-5xl mx-auto px-8 flex flex-col justify-end h-full py-8 w-full">
+                    <div className="whitespace-nowrap flex-wrap mb-3 flex gap-2 items-center font-bold">
                         <Link href="/">
                             Home
                         </Link>
@@ -81,7 +104,7 @@ const PostPage = ({ source, frontMatter, category, slug, categoryMeta }: PostPag
                     <h1 className="mb-2 text-gray-900 dark:text-white">
                       {frontMatter.title}
                     </h1>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm m-0 text-gray-500 dark:text-gray-400">
                       {format(parseISO(frontMatter.date), 'MMMM dd, yyyy')}
                     </p>
                   </div>

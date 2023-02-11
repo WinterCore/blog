@@ -29,7 +29,7 @@ const Layout = ({ children, wavy, customMeta, hero }: LayoutProps): JSX.Element 
       <Head customMeta={customMeta} />
         <header>
           <div className="max-w-5xl px-8 mx-auto">
-            <div className="flex items-center justify-between py-6">
+            <div className="flex items-center justify-between py-4">
               <Navigation />
               <ThemeSwitch />
             </div>
@@ -37,7 +37,7 @@ const Layout = ({ children, wavy, customMeta, hero }: LayoutProps): JSX.Element 
         </header>
         {! wavy && (
             <>
-              <div className="h-[200px]">
+              <div className="min-h-[200px] flex flex-col justify-end">
                   {hero}
               </div>
               <div className="h-[72px] bg-white dark:bg-[#242F47]"></div>
@@ -55,7 +55,7 @@ const Layout = ({ children, wavy, customMeta, hero }: LayoutProps): JSX.Element 
               </div>
             </>
         )}
-        <main className="flex-1 bg-white dark:bg-[#242F47]">
+        <main className="flex-1 pb-20 bg-white dark:bg-[#242F47]">
           <div className="max-w-5xl px-8 py-4 mx-auto">{children}</div>
         </main>
         <footer className="py-8">
@@ -64,8 +64,8 @@ const Layout = ({ children, wavy, customMeta, hero }: LayoutProps): JSX.Element 
             <div className="text-sm footer-links">
               <b className="text-gray-500 dark:text-gray-300">Links</b>
               <ul className="mt-4 text-black dark:text-white flex flex-col gap-2">
-                  <li><a href="https://github.com/WinterCore" className="text-inherit ">Github</a></li>
-                  <li><a href="mailto:hogobbl@gmail.com" className="text-inherit ">Contact</a></li>
+                  <li><a href="https://github.com/WinterCore" target="_blank" className="text-inherit" rel="noreferrer">Github</a></li>
+                  <li><a href="mailto:hogobbl@gmail.com" target="_blank" className="text-inherit" rel="noreferrer">Contact</a></li>
               </ul>
             </div>
           </div>
